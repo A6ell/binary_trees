@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "binary_trees.h"
 
@@ -27,3 +28,4 @@ parent->left = new_node;
 	if (new_node->left)
 		new_node->left->parent = new_node;
 	return (new_node);
+}
