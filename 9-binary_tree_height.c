@@ -9,13 +9,13 @@
 */
 size_t binary_tree_height(const binary_tree_t *tree)
 {
-size_t left_height, right_height;
+size_t left_height, right_height = 0;
 
-if (tree == NULL)
+if (!tree)
 return (0);
 
-left_height = binary_tree_height(tree->left);     /* Height of left subtree */
-right_height = binary_tree_height(tree->right);   /* Height of right subtree */
+left_height = tree->left ? 1 + binary_tree_height(tree->left) : 0;
+right_height = tree->right ? 1 + binary_tree_height(tree->right) : 0;
 
 /* Return the larger of the two subtrees */
 return (1 + (left_height > right_height ? left_height : right_height));
