@@ -17,18 +17,16 @@ int _pow_recursion(int x, int y)
 }
 
 /**
- * binary_tree_is_perfect - checks if a binary tree is perfect
- * @tree: a pointer to the root node of the tree to check
+ * binary_tree_is_perfect - Checks if a binary tree is perfect.
+ * @tree: Pointer to the root node of the tree to check.
  *
- * Return: 1 if the tree is perfect
- *         0 if the tree is not perfect
- *         0 if tree is NULL
+ * Return: 1 if the tree is perfect, 0 otherwise. If tree is NULL, return 0.
  */
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	size_t height = 0;
-	size_t nodes = 0;
-	size_t power = 0;
+	size_t left_subtree_height = 0;
+	size_t total_nodes = 0;
+	size_t expected_nodes = 0;
 
 	if (!tree)
 		return (0);
@@ -36,20 +34,21 @@ int binary_tree_is_perfect(const binary_tree_t *tree)
 	if (!tree->right && !tree->left)
 		return (1);
 
-	height = binary_tree_height(tree);
-	nodes = binary_tree_size(tree);
+	left_subtree_height = binary_tree_height(tree->left);
+	total_nodes = binary_tree_size(tree);
 
-	power = (size_t)_pow_recursion(2, height + 1);
-	return (power - 1 == nodes);
+	expected_nodes = (size_t)_pow_recursion(2, left_subtree_height + 1);
+
+	return (expected_nodes == total_nodes);
 }
 
+
 /**
- * binary_tree_size - measures the size of a binary tree
- * @tree: tree to measure the size of
- *
- * Return: size of the tree
- *         0 if tree is NULL
- */
+* binary_tree_size - Measures the size of a binary tree.
+* @tree: Pointer to the root node of the tree to measure the size.
+*
+* Return: Size of the tree. If tree is NULL, return 0.
+*/
 size_t binary_tree_size(const binary_tree_t *tree)
 {
 	if (!tree)
@@ -59,12 +58,11 @@ size_t binary_tree_size(const binary_tree_t *tree)
 }
 
 /**
- * binary_tree_height - measures the height of a binary tree
- * @tree: tree to measure the height of
- *
- * Return: height of the tree
- *         0 if tree is NULL
- */
+* binary_tree_height - Measures the height of a binary tree.
+* @tree: Pointer to the root node of the tree.
+*
+* Return: Height of the tree, or 0 if tree is NULL.
+*/
 size_t binary_tree_height(const binary_tree_t *tree)
 {
 	size_t left_height = 0;
